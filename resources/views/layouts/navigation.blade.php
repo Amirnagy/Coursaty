@@ -49,8 +49,10 @@
     </div>
 
 @auth
+
 <div class="profile">
-    <img src={{ asset('assets/images/pic-1.jpg') }} class="image" alt="">
+    {{-- src={{asset("assets/images/about-img.svg")}} --}}
+    <img src = {{ asset("avatar/".Auth::user()->profile_photo_path)}} class="image" alt="">
     <h3 class="name">{{ Auth::user()->name }}</h3>
     <p class="role">role</p>
     <a href={{url('profile')}} class="btn">view profile</a>

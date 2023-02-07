@@ -8,6 +8,7 @@ use App\Http\Controllers\Pages\profile;
 use App\Http\Controllers\Pages\teacher;
 use App\Http\Controllers\Pages\countactUS;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Pages\beinstractor;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,9 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login'
 
 Route::middleware(['auth','verified'])->group(function () {
 
-    Route::get('/dashboard',function(){
-        return view('dashboard');
-    });
 
     Route::get('/home',[Home::class,'home'] );
+    Route::get('/beInstractor',[beinstractor::class,'beInstractor'] );
     Route::get('/countactUS',[countactUS::class,'contactus'] );
     Route::get('/courses',[courses::class,'courses'] );
     Route::get('/about',[about::class,'about'] );

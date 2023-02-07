@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class profile extends Controller
 {
@@ -13,6 +14,7 @@ class profile extends Controller
     }
 
     public function updateProfile(){
-        return view('pages.updateProfile');
+        $user = Auth::user();
+        return view('pages.updateProfile',compact('user'));
     }
 }
