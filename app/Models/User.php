@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Courses;
 use App\Models\Comments;
+use App\Models\infoInstractors;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,5 +54,11 @@ class User extends Authenticatable
 
     public function comments(){
         return $this->hasMany(Comments::class,'user_id','id');
+    }
+
+
+    public function InfoInstractor()
+    {
+        return $this->hasOne(infoInstractors::class,'user_id','id');
     }
 }
