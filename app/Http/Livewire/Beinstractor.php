@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\infoInstractors;
 
 class Beinstractor extends Component
 {
@@ -38,8 +39,14 @@ class Beinstractor extends Component
     public function beInstractor()
     {
         $this->validate();
-        $infoInstractor = $this->user->InfoInstractor();
-        $infoInstractor->occupation = '$this->occupation';
+        $infoInstractor = $this->user->InfoInstractor()->first();
+        if (!$infoInstractor) {
+            $infoInstractor = new infoInstractors;
+            $infoInstractor->user_id = $this->user->id;
+        }
+        // dd($infoInstractor);
+        $infoInstractor->user_id = $this->user->id;
+        $infoInstractor->occupation = $this->occupation;
         $infoInstractor->education = $this->education;
         $infoInstractor->certifications = $this->certifications;
         $infoInstractor->experience = $this->experience;

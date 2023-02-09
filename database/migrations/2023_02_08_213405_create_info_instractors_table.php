@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('info_instractors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->text('education');
+            $table->text('occupation')->nullable();
+            $table->text('education')->nullable();
             $table->text('certifications')->nullable();
             $table->text('experience')->nullable();
-            $table->text('skills');
+            $table->text('skills')->nullable();
             $table->timestamps();
         });
     }
