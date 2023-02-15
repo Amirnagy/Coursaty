@@ -24,9 +24,8 @@
 
             <p>update picture</p>
             @error('photo') <span class="error">{{ $message }}</span> @enderror
-            
+
                 <input type="file" accept="image/*" class="box" wire:model="newPhoto" name="newPhoto">
-                <div wire:loading wire:target="photo">Uploading...</div>
                 <p style="display: {{$photosucess}};">upload successfully</p>
             <button type="submit" class="btn"> update </button>
 

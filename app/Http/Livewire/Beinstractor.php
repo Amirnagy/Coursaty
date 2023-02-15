@@ -14,6 +14,7 @@ class Beinstractor extends Component
     public $certifications;
     public $experience;
     public $skills;
+    public $success = 'none';
 
     public function mount($user)
     {
@@ -32,25 +33,33 @@ class Beinstractor extends Component
     {
         return view('livewire.beinstractor',
         ['user' => $this->user]);
-
     }
 
 
     public function beInstractor()
     {
         $this->validate();
-        $infoInstractor = $this->user->InfoInstractor()->first();
-        if (!$infoInstractor) {
-            $infoInstractor = new infoInstractors;
-            $infoInstractor->user_id = $this->user->id;
-        }
+        // dd($this->user);
+        $this->user->roles = 1;
+        $infoInstractor = $this->user->infoInstractor ?: new infoInstractors;
         // dd($infoInstractor);
+
+
+        /**
+        * $infoInstractor = $this->user->InfoInstractor()->firstOrCreate([
+        *'user_id' => $this->user->id
+        *]);
+        */
         $infoInstractor->user_id = $this->user->id;
         $infoInstractor->occupation = $this->occupation;
         $infoInstractor->education = $this->education;
         $infoInstractor->certifications = $this->certifications;
         $infoInstractor->experience = $this->experience;
         $infoInstractor->skills = $this->skills;
-        $infoInstractor->save();
+
+        if($infoInstractor->save() && $this->user->save())
+        {
+            return $this->success = 'block';
+        }
     }
 }

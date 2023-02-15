@@ -2,6 +2,7 @@
 
     <section class="form-container">
 
+
         <form enctype="multipart/form-data" wire:submit.prevent='beInstractor'>
             <h3>be Instractor</h3>
 
@@ -34,7 +35,7 @@
             @enderror
             <p>Skills and Areas of Expertise:</p>
             <textarea id="skills" name="skills" required class="box" wire:model.lazy="skills"></textarea>
-
+            <p style="display: {{$success}};">update success</p>
             <button type="submit" class="btn"> update </button>
 
         </form>

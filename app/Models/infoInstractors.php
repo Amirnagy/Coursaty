@@ -12,6 +12,7 @@ class infoInstractors extends Model
 
     protected $fillable = [
         'user_id',
+        'occupation',
         'education',
         'certifications',
         'experience',

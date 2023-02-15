@@ -7,13 +7,24 @@
         <div class="info">
 
             <div class="user">
-                <img src={{asset("assets/images/pic-1.jpg")}} alt="">
-                <h3>shaikh anas</h3>
-                <p>student</p>
+                <img src = '{{ asset("avatar/".Auth::user()->profile_photo_path)}}'  class="image" alt="">
+                <h3>{{Auth::user()->name}}</h3>
+                @if (Auth::user()->roles == 1 )
+                <p>Instractor</p>
+                @else
+                <p>Students</p>
+                @endif
                 <a href={{ url('viewUpdateProfile') }} class="inline-btn">update profile</a>
+                @if (Auth::user()->roles == 1)
+                <a href={{ url('beInstractor') }} class="inline-btn">update CV</a>
+                <a href={{ url('downloadcv') }} class="inline-btn">download CV</a>
+                <a href={{ url('uploadCourse') }} class="inline-btn">upload Course</a>
+                <a href={{ url('addVideos') }} class="inline-btn">Manage Courses</a>
+                @endif
             </div>
 
             <div class="box-container">
+
 
                 <div class="box">
                     <div class="flex">
@@ -50,6 +61,8 @@
 
             </div>
         </div>
+
+
 
     </section>
 

@@ -40,11 +40,7 @@
             </div>
         </div>
 
-        <div class="box">
-            <h3 class="title">become a tutor</h3>
-            <p class="tutor">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, nam?</p>
-            <a href= {{url('beInstractor')}} class="inline-btn">get started</a>
-        </div>
+
 
     </div>
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('category_id')->references('id')->on('categorys')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('descrption')->nullable();
+            $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->integer('likes')->nullable();
             $table->date('perior')->nullable();

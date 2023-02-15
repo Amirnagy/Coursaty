@@ -16,10 +16,9 @@
             <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
-
         @auth
         <div class="profile">
-            <img src={{asset('assets/images/pic-1.jpg')}}class="image" alt="">
+            <img src={{ asset("avatar/".Auth::user()->profile_photo_path)}} class="image" alt="">
             <h3 class="name">{{ Auth::user()->name }}</h3>
             <p class="role">student</p>
             {{-- <a href="profile.html" class="btn">view profile</a> --}}
@@ -51,10 +50,13 @@
 @auth
 
 <div class="profile">
-    {{-- src={{asset("assets/images/about-img.svg")}} --}}
-    <img src = {{ asset("avatar/".Auth::user()->profile_photo_path)}} class="image" alt="">
+    <img class="image" src = {{ asset("avatar/".Auth::user()->profile_photo_path)}}  alt="">
     <h3 class="name">{{ Auth::user()->name }}</h3>
-    <p class="role">role</p>
+    @if (Auth::user()->roles == 1 )
+                <p class="role">Instractor</p>
+                @else
+                <p class="role">Students</p>
+                @endif
     <a href={{url('profile')}} class="btn">view profile</a>
 </div>
 @endauth
@@ -63,7 +65,7 @@
         <a href={{ url('home') }}><i class="fas fa-home"></i><span>Home</span></a>
         <a href={{ url('about') }}><i class="fas fa-question"></i><span>About</span></a>
         <a href={{ url('courses') }}><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
-        <a href={{ url('instractor') }}><i class="fas fa-chalkboard-user"></i><span>Instractor</span></a>
+        <a href={{ url('viewinstractor') }}><i class="fas fa-chalkboard-user"></i><span>Instractor</span></a>
         <a href={{ url('countactUS') }}><i class="fas fa-headset"></i><span>Contact us</span></a>
     </nav>
 
