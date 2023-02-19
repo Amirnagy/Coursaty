@@ -51,17 +51,17 @@
                                     </video>
                                 </th>
                                 <th>
-                                    <a wire:click.prevent="updateCourse" href="#"> <i class="material-icons" title="Edit">&#xE254;</i></a>
+                                    <a wire:click.prevent="editVideo({{$V->id}})" href="#"> <i class="material-icons" title="Edit">&#xE254;</i></a>
                                 </th>
                                 <td>
-                                    <a wire:click.prevent="deleteCourse" href="#" > <i class="material-icons"  title="Delete">&#xE872;</i></a>
+                                    <a wire:click.prevent="deleteVideo({{$V->id}})" href="#" > <i class="material-icons"  title="Delete">&#xE872;</i></a>
                                 </th>
                             </tr>
                                 @endforeach
                             @else
                                 <tr>
                                     <td colspan="3" align="center">
-                                        No Posts Found.
+                                        No Video Found.
                                     </td>
                                 </tr>
                             @endif

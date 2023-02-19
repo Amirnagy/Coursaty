@@ -12,7 +12,10 @@
 
                     <p >Video:</p>
                 @error('video') <span class="error">{{ $message }}</span> @enderror <br>
+
                     <input type="file" id="video" wire:model.lazy="video">
+
+                    <p wire:loading wire:target="video"> Uploading....</p>
 
 
                     <div class="d-grid gap-2">
