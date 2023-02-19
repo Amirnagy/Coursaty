@@ -18,8 +18,8 @@
                 @if (Auth::user()->roles == 1)
                 <a href={{ url('beInstractor') }} class="inline-btn">update CV</a>
                 <a href={{ url('downloadcv') }} class="inline-btn">download CV</a>
-                <a href={{ url('uploadCourse') }} class="inline-btn">upload Course</a>
-                <a href={{ url('addVideos') }} class="inline-btn">Manage Courses</a>
+                {{-- <a href={{ url('uploadCourse') }} class="inline-btn">upload Course</a> --}}
+                <a href={{ url('manageCourse') }} class="inline-btn">Manage Courses</a>
                 @endif
             </div>
 

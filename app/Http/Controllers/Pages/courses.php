@@ -25,6 +25,10 @@ class courses extends Controller
         return view('pages.manageCourses');
     }
 
+    public function manageVideos($id){
+        return view('pages.manageVideos',compact('id'));
+    }
+
 
 
 }

@@ -2,85 +2,98 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Courses;
+use App\Models\Videos;
 use Livewire\Component;
-use App\Models\Categorys;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class ManageVideos extends Component
 {
     use WithFileUploads;
-    public $updatecourses = false;
-    public $name ;
-    public $idcourse ;
-    public $descrption ;
-    public $categoryCourse ;
-    public $images;
-    public $priority_date;
-    public $success ='none';
 
+    public $idCourse;
+
+    public $videosOfCourse;
+
+
+
+
+    public $video;
+    public $descrption;
+
+    public $showAdd = false;
+    public $showUpdate   = false;
 
     protected $rules = [
-        'name' => 'required',
-        'descrption' => 'required',
-        'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:8048',
-        'categoryCourse' => 'required',
-        'priority_date' => 'required'
+        'video' => 'required|mimetypes:video/mp4,video/quicktime,video/x-msvideo',
+        'descrption' => 'required'
     ];
 
 
-    public function updateCourse($id)
+
+    public function resetFields(){
+        $this->video = '';
+        $this->descrption = '';
+    }
+
+    public function cancelVideo()
     {
-        $course = Courses::find($id);
-        $this->idcourse = $course->id;
-        $this->name = $course->name;
-        $this->descrption = $course->descrption ;
-        $images =$course->image;
-        $this->images = Storage::disk('s3')->get($images);
-        // dd($this->images);
-        $this->updatecourses = true;
+        $this->showAdd = false;
+        $this->showUpdate = false;
+        $this->resetFields();
+    }
+
+    public function addVideo()
+    {
+        $this->resetFields();
+        $this->showAdd = true;
+        $this->showUpdate = false;
     }
 
 
-    public function deleteCourse($id)
-    {
-            Courses::find($id)->delete();
-    }
-
-    public function uploadeCourse($id)
+    public function storeVideo()
     {
         $this->validate();
-        $image = $this->images;
-        $imageName = time().'.'.$image->getClientOriginalExtension();
-        $path = $image->storeAS('images',$imageName ,'s3');
+        $video = $this->video;
+        $videoName = time().'.'.$video->getClientOriginalExtension();
 
-
-        $course = Courses::find($id);
-        $course->descrption = $this->descrption;
-        $course->name = $this->name;
-        $course->category_id = $this->categoryCourse;
-        $course->image = $path;
-        if($course->update())
-        {
-            $this->success = 'block';
-            return $this-> updatecourses = false;
-        }
+        $videoPath = $video->storeAS('videos',$videoName,'s3',[
+            'visibility' => 'public',
+        ]);
+        Videos::create([
+            'course_id' => $this->idCourse,
+            'video' => $videoPath,
+            'descrption' => $this->descrption,
+        ]);
+        $this->resetFields();
+        $this->showAdd = false;
     }
 
+    public function deleteVideo($id)
+    {
+
+    }
+
+    public function editVideo($id){
+
+    }
+
+    public function updateVideo()
+    {
+        $this->validate();
+
+    }
+
+
+    public function videos()
+    {
+        $videos = Videos::select('video','descrption')->where('course_id','=', $this->idCourse)->get();
+        return $this->videosOfCourse = $videos;
+    }
 
 
     public function render()
     {
-        // dd($this);
-        $user = Auth::user();
-        // $courses = Courses::all();
-        $courses = $user->courses;
-        $category = Categorys::all();
-        return view('livewire.manage-videos',compact('courses','user','category'));
+        $this->videos();
+        return view('livewire.manage-videos');
     }
-
-
-
 }

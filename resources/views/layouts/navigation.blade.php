@@ -20,7 +20,13 @@
         <div class="profile">
             <img src={{ asset("avatar/".Auth::user()->profile_photo_path)}} class="image" alt="">
             <h3 class="name">{{ Auth::user()->name }}</h3>
-            <p class="role">student</p>
+
+                @if (Auth::user()->roles == 1 )
+                <p class="role">Instractor</p>
+                @else
+                <p class="role">Students</p>
+                @endif
+
             {{-- <a href="profile.html" class="btn">view profile</a> --}}
             <div class="flex-btn">
                 {{-- <a href="login.html" class="option-btn">login</a> --}}

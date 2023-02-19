@@ -41,7 +41,8 @@ Route::middleware(['auth','verified'])->group(function () {
     // Route::get('/makecv',[CV::class,'makeCV'] );
     Route::get('/downloadcv',[CV::class,'downloadCV'] );
     Route::get('/uploadCourse',[courses::class,'uploadeCourse'] );
-    Route::get('/addVideos',[courses::class,'managecourses'] );
+    Route::get('/manageCourse',[courses::class,'managecourses'] );
+    Route::get('/manageVideos/{id}',[courses::class,'manageVideos'] );
 });
 
 

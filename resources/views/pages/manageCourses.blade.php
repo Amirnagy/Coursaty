@@ -1,4 +1,4 @@
 <x-app-layout>
-    <livewire:manage-videos />
+    <livewire:manage-course />
 </x-app-layout>
 
