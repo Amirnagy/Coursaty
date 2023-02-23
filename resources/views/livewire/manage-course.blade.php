@@ -1,21 +1,7 @@
 <div>
     <a href="uploadCourse" class="btn" ><i class="material-icons" >&#xE147;</i> <span>Add Course</span></a>
 
-@if(session()->has('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session()->get('success') }}
-            </div>
-@endif
-@if(session()->has('error'))
-            <div class="alert alert-danger" role="alert">
-                {{ session()->get('error') }}
-            </div>
-@endif
-
-@if ($updatecourses)
-<section class="form-container">
-
-
+{{-- put modal for create course --}}
     <form enctype="multipart/form-data" wire:submit.prevent='uploadeCourse({{$idcourse}})'>
         <h3>upload Course </h3>
 
@@ -47,8 +33,7 @@
         <button type="submit" class="btn"> update </button>
     </form>
 
-</section>
-@else
+
 <div class="container-xl">
 	<div class="table-responsive">
 		<div class="table-wrapper">
@@ -94,6 +79,6 @@
 		</div>
 	</div>
 </div>
-@endif
+
 
 </div>

@@ -18,7 +18,7 @@
 
         @auth
         <div class="profile">
-            <img src={{ asset("avatar/".Auth::user()->profile_photo_path)}} class="image" alt="">
+            
             <h3 class="name">{{ Auth::user()->name }}</h3>
 
                 @if (Auth::user()->roles == 1 )

@@ -14,17 +14,11 @@ class ManageVideos extends Component
 
     public $idCourse;
     public $videoID;
-
     public $videosOfCourse;
-
-
-
     public $oldVideoPath;
     public $video;
     public $descrption;
 
-    public $showAdd = false;
-    public $showUpdate   = false;
 
     protected $rules = [
         'video' => 'required|mimetypes:video/mp4,video/quicktime,video/x-msvideo',
@@ -32,24 +26,9 @@ class ManageVideos extends Component
     ];
 
 
-
     public function resetFields(){
         $this->video = '';
         $this->descrption = '';
-    }
-
-    public function cancelVideo()
-    {
-        $this->showAdd = false;
-        $this->showUpdate = false;
-        $this->resetFields();
-    }
-
-    public function addVideo()
-    {
-        $this->resetFields();
-        $this->showAdd = true;
-        $this->showUpdate = false;
     }
 
 
@@ -68,11 +47,7 @@ class ManageVideos extends Component
             'descrption' => $this->descrption,
         ]);
 
-
-        $this->emit('video-uploaded');
-
         $this->resetFields();
-        $this->showAdd = false;
     }
 
     public function deleteVideo($id)
@@ -100,10 +75,10 @@ class ManageVideos extends Component
             } else {
                 $this->videoID = $video->id;
                 $this->descrption = $video->descrption;
-                $this->video = 'https://courasty.s3.us-west-1.amazonaws.com/'.$video->video;
-                $this->oldVideoPath = $video->video;
-                $this->showUpdate = true;
-                $this->showAdd = false;
+                $this->video = "https://courasty.s3.us-west-1.amazonaws.com/$video->video";
+
+                $this->oldVideoPath = $this->video;
+
             }
         } catch (\Exception $ex) {
             session()->flash('error','Something goes wrong!!');
@@ -130,7 +105,6 @@ class ManageVideos extends Component
         $videoRecord->descrption = $this->descrption;
         $videoRecord->save();
         $this->resetFields();
-        $this->showUpdate = false;
     }
 
 

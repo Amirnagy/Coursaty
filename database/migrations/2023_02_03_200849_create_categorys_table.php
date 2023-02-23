@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('categorys', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('profile_photo_path')->nullable()->default('WU2KHT8iJwwj9scRMTcIu4bZMyS20qE3HeOXhqv2.jpg');
             $table->timestamps();
         });
     }

@@ -23,9 +23,9 @@ use App\Http\Livewire\ManageVideos;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
-
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
+});
 Route::middleware(['auth','verified'])->group(function () {
 
 
